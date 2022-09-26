@@ -3,10 +3,22 @@ import { APP_PIPE } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { UserModule } from './user-module/user.module';
+import Category from './entities/category';
+import Comment from './entities/Comment';
+import Post from './entities/post';
+import Tag from './entities/tag';
+import User from './entities/user';
 
 @Module({
-  imports: [UserModule, DatabaseModule],
+  imports: [DatabaseModule.forRoot({
+    entities: [
+      User,
+      Post,
+      Tag,
+      Category,
+      Comment
+    ]
+  })],
   controllers: [AppController],
   providers: [AppService,
   {
@@ -14,4 +26,6 @@ import { UserModule } from './user-module/user.module';
     useClass: ValidationPipe
   }],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() { }
+}
