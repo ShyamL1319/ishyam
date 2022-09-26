@@ -1,22 +1,15 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
+import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import Category from './entities/category';
-import Comment from './entities/Comment';
 import Post from './entities/post';
-import Tag from './entities/tag';
-import User from './entities/user';
 
 @Module({
   imports: [DatabaseModule.forRoot({
     entities: [
-      User,
       Post,
-      Tag,
-      Category,
-      Comment
     ]
   })],
   controllers: [AppController],
@@ -27,5 +20,5 @@ import User from './entities/user';
   }],
 })
 export class AppModule {
-  constructor() { }
+  constructor(private dataSource: DataSource) { }
 }

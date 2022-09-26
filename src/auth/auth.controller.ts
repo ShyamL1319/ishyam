@@ -12,19 +12,19 @@ export class AuthController {
         private authService: AuthService,
     ) { }
 
-    @Post('login')
-    async login(@Body() userDTO: LoginDTO) {
-        const user = await this.userService.findByLogin(userDTO);
-        const payload: Payload = {
-            username: user.username
-        };
-        const token = await this.authService.signPayload(payload);
-        return { token };
-    }
+    // @Post('login')
+    // async login(@Body() userDTO: LoginDTO) {
+    //     const user = await this.userService.findByLogin(userDTO);
+    //     const payload: Payload = {
+    //         username: user.username
+    //     };
+    //     const token = await this.authService.signPayload(payload);
+    //     return { token };
+    // }
 
-    @Post('register')
-    async register(@Body() userDTO: RegisterDTO) {
-        const user = await this.userService.create(userDTO);
-        return { 'message': 'user creatd successfully' };
-    }
+    // @Post('register')
+    // async register(@Body() userDTO: RegisterDTO) {
+    //     const user = await this.userService.create(userDTO);
+    //     return { 'message': 'user creatd successfully' };
+    // }
 }

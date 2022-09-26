@@ -3,16 +3,9 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
-    OneToOne,
 } from 'typeorm';
-import Comment from './Comment';
-import User from './user';
-import Tag from './tag';
-import Category from './category';
 
 @Entity()
 class Post {

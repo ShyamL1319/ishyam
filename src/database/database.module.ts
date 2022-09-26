@@ -13,13 +13,23 @@ import { DbConfig } from "./db.interface";
 })
 
 export class DatabaseModule {
-
     private static getConnectionOptionsSqlite(dbData: any): TypeOrmModuleOptions {
         throw new NotImplementedException(`Database type ${dbData.type} not supported`);
     }
 
     private static getConnectionOptions(configService: ConfigService, dbConfig: DbConfig): TypeOrmModuleOptions{
-        const dbData = configService.get().db;
+        const env = process.env;
+        const dbData = {
+            type: env.DB_TYPE || '',
+            user: env.MYSQL_USER || '',
+            pass: env.MYSQL_PASSWORD || '',
+            name: env.MYSQL_DB || '',
+            host: env.MYSQL_DB_HOST,
+            port: parseInt(env.MYSQL_DB_PORT || 'NaN', 10),
+            dialect: env.DB_DIALECT || '',
+            charset: env.MYSQL_CHARSET || '',
+            collate: env.MYSQL_COLLATE || '',
+        }
         console.log(dbData);
         let connectionOption: TypeOrmModuleOptions;
         if (!dbData) {
@@ -48,7 +58,6 @@ export class DatabaseModule {
             host: dbData.host,
             port: dbData.port,
             charset: dbData.charset,
-            database: process.env.MYSQL_DB,
             extra: {
                 collate: dbData.collate,
                 dialect: dbData.dialect,

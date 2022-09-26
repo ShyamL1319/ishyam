@@ -6,10 +6,10 @@ import { HttpExceptionFilter } from './http-exception.filter';
 import { LoggingInterceptor } from './logging.interceptor';
 import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import User from 'src/entities/User';
+// import User from 'src/entities/User';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User])],
+    imports: [TypeOrmModule.forFeature([])],
     providers: [
         UserService,
         {

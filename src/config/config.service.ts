@@ -20,7 +20,7 @@ export class ConfigService {
         }
         return this.config;
     }
-    parseConfigFromEnv(env: NodeJS.ProcessEnv): ConfigDBData {
+    public parseConfigFromEnv(env: NodeJS.ProcessEnv): ConfigDBData {
         return {
                 type: env.DB_TYPE || '',
                 user: env.MYSQL_USER || '',
@@ -34,7 +34,7 @@ export class ConfigService {
         }
     }
 
-    public get(): Readonly<ConfigData> { 
+    public get(): ConfigData { 
         return this.config;
     }
 }

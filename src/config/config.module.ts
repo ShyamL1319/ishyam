@@ -8,8 +8,7 @@ const configFactory = {
     useFactory: () => { 
         dotenv.config();
         const config = new ConfigService()
-        config.loadFromDotenv(process.env);
-        return config
+        return config.loadFromDotenv(process.env);
     }
 }
 @Module({
