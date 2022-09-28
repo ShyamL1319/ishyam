@@ -8,13 +8,19 @@ import { AppService } from './app.service';
 import Post  from './entities/Post';
 import { DatabaseModule } from './database/database.module';
 import PostModule from './post/post.module';
+import Comment from './entities/Comment';
+import User from './entities/User';
+import Tag from './entities/Tag';
+import Category from './entities/Category';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     DatabaseModule.forRoot({
-      entities:[Post]
+      entities:[Post,Comment,User,Tag,Category]
     }),
     PostModule,
+    AuthModule
     // ConfigModule.forRoot(
     //   {
     //     ignoreEnvFile: false,
