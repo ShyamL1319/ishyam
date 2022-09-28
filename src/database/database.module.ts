@@ -6,8 +6,16 @@ import { ConfigService } from '../config/config.service';
 import { DbConfig } from './db.interface';
 import { DbConfigError, DbError } from './db.error';
 import { connect } from 'http2';
+import PostModule from 'src/post/post.module';
+import { PostController } from 'src/post/post.controller';
 
-@Module({})
+@Module({
+    // imports: [PostModule],
+    // controllers: [],
+    // providers: [],
+    // exports: [PostModule],
+    
+})
 
 export class DatabaseModule {
 
@@ -50,6 +58,7 @@ export class DatabaseModule {
                 collate: dbdata.collate,
                 dialect: dbdata.dialect,
             },
+            synchronize: true,
         };
     }
     public static forRoot(dbconfig: DbConfig): DynamicModule {

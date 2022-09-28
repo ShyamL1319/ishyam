@@ -5,14 +5,16 @@ import { ConfigModule} from "@nestjs/config"
 import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import Post from './entities/post';
+import Post  from './entities/Post';
 import { DatabaseModule } from './database/database.module';
+import PostModule from './post/post.module';
 
 @Module({
   imports: [
     DatabaseModule.forRoot({
       entities:[Post]
     }),
+    PostModule,
     // ConfigModule.forRoot(
     //   {
     //     ignoreEnvFile: false,
@@ -31,8 +33,8 @@ import { DatabaseModule } from './database/database.module';
     //   synchronize: true,
     // }),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) { }

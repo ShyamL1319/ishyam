@@ -28,17 +28,17 @@ class Post {
     // @OneToOne(() => Category, category => category.post)
     // public category: Category;
 
-    @Column()
-    public url: string;
+    @Column({ default: "" })
+    public url: string = "";
 
-    @Column()
-    public text: string;
+    @Column({ default: "" })
+    public text: string = "";
 
-    @Column()
+    @Column({ default: new Date })
     @CreateDateColumn()
-    public createdAt: Date;
+    public createdAt: Date = new Date;
 
-    @Column()
+    @Column({ default: new Date })
     @UpdateDateColumn()
     public updatedAt: Date;
 }
