@@ -3,38 +3,38 @@ import { DEFAULT_CONFIG } from "./config.default";
 import { ConfigData, ConfigDBData } from "./config.interface";
 
 @Injectable()
-
-export class ConfigService { 
+export class ConfigService {
     private config: ConfigData;
-    
-    constructor(data: ConfigData = DEFAULT_CONFIG) { 
+    constructor(data: ConfigData = DEFAULT_CONFIG) {
         this.config = data;
     }
-    public loadFromDotenv(env: NodeJS.ProcessEnv): ConfigData { 
-        console.log(env);
-        this.config = {
+
+    public loadFromDotenv() {
+        this.config = this.parseConfigFromEnv(process.env);
+    }
+    parseConfigFromEnv(env: NodeJS.ProcessEnv): ConfigData {
+        return {
             env: env.ENV || DEFAULT_CONFIG.env,
             port: env.PORT ? parseInt(env.PORT, 10) : DEFAULT_CONFIG.port,
-            db: this.parseConfigFromEnv(env) || DEFAULT_CONFIG.db,
-            logLevel: env.LOG_LEVEL || DEFAULT_CONFIG.logLevel
+            db: this.parseDBConfigFromEnv(env) || DEFAULT_CONFIG.db,
+            logLevel: env.LOG_LEVEL || DEFAULT_CONFIG.logLevel,
         }
-        return this.config;
     }
-    public parseConfigFromEnv(env: NodeJS.ProcessEnv): ConfigDBData {
+    parseDBConfigFromEnv(env: NodeJS.ProcessEnv): ConfigDBData {
         return {
-                type: env.DB_TYPE || '',
-                user: env.MYSQL_USER || '',
-                pass: env.MYSQL_PASSWORD || '',
-                name: env.MYSQL_DB || '',
-                host: env.MYSQL_DB_HOST,
-                port: parseInt(env.MYSQL_DB_PORT || 'NaN',10),
-                dialect: env.DB_DIALECT || '',
-                charset: env.MYSQL_CHARSET || '',
-                collate: env.MYSQL_COLLATE || '',
+            type: env.DB_TYPE || '',
+            user: env.MYSQL_USER || '',
+            pass: env.MYSQL_PASSWORD || '',
+            name: env.MYSQL_DB || '',
+            host: env.MYSQL_DB_HOST || '',
+            port: parseInt(env.MYSQL_DB_PORT || 'NaN', 10),
+            dialect: env.DB_DIALECT || '',
+            charset: env.DB_CHARSET || '',
+            collate: env.DB_COLLATE || '',
         }
     }
 
-    public get(): ConfigData { 
+    public get(): Readonly<ConfigData> {
         return this.config;
     }
 }

@@ -8,6 +8,7 @@ async function bootstrap() {
       transform: true,
     })
   )
+  console.log(process.env)
   app.setGlobalPrefix('api/v1');
   await app.listen(3000);
 }

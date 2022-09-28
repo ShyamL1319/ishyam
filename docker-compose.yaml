@@ -9,14 +9,15 @@ services:
     depends_on:
       - mysql
   mysql:
-    image: mysql:latest
+    image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: nest
-      MYSQL_USER: root
+      MYSQL_DATABASE: test
       MYSQL_PASSWORD: root
       volumes:
         -mysql-data:/var/lib/mysql
+      ports:
+        -3306:3306
 volumes:
   mysql_data: {}
       

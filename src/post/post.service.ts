@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 // import { LoginDTO, RegisterDTO } from '../auth/auth.dto';
 // import { Payload } from '../types/payload';
 import { Repository } from 'typeorm';
-import User from '../entities/User';
+//import User from '../entities/User';
 import Post from '../entities/Post';
 import { PostDTO } from './post.dto';
 
@@ -25,5 +25,9 @@ export class PostService {
         } catch (err) {
             throw new BadRequestException(err);
         }
+    }
+
+    async findAll(): Promise<Post[]> { 
+        return await this.postRepo.find();
     }
 }

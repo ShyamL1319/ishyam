@@ -4,7 +4,7 @@ import { PostService } from './post.service';
 import { PostDTO } from './post.dto';
 
 @Controller('post')
-export class AuthController {
+export class PostController {
     constructor(
         private postService: PostService,
     ) { }
