@@ -1,4 +1,5 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UserService } from '../shared/user.service';
 import { Payload } from '../types/payload';
@@ -12,6 +13,7 @@ export class AuthController {
         private authService: AuthService,
     ) { }
 
+    @ApiTags("Auth")
     @Post('login')
     async login(@Body() userDTO: LoginDTO) {
         const user = await this.userService.findByLogin(userDTO);
@@ -21,7 +23,8 @@ export class AuthController {
         const token = await this.authService.signPayload(payload);
         return { token };
     }
-
+    
+    @ApiTags("Auth")
     @Post('register')
     async register(@Body() userDTO: RegisterDTO) {
         const user = await this.userService.create(userDTO);

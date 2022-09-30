@@ -12,6 +12,8 @@ import { PostDTO } from './post.dto';
 
 @Injectable()
 export class PostService {
+
+
     constructor(@InjectRepository(Post) private postRepo: Repository<Post>) { }
 
     // created new post 
@@ -30,4 +32,14 @@ export class PostService {
     async findAll(): Promise<Post[]> { 
         return await this.postRepo.find();
     }
+    
+    async getPostByid(id: string) {
+        try {
+            return this.postRepo.findOneBy({ id: parseInt(id) })
+        } catch (error) {
+            throw new Error('Method not implemented.');
+        }
+
+    }
+
 }

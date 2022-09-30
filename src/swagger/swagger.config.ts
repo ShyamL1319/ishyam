@@ -5,8 +5,8 @@ import { SwaggerConfig } from './swagger.interface';
  * Change this to suit your app!
  */
 export const SWAGGER_CONFIG: SwaggerConfig = {
-    title: 'Nest js Template',
-    description: 'Template',
+    title: 'Nest js Swagger Document',
+    description: 'This Basic to Upper Nest Js Api Building',
     version: '1.0',
-    tags: ['Template'],
+    tags: ["Base", 'Auth', 'Post',],
 };
